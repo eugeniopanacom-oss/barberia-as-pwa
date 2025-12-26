@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A.S. Barbería - Reserva Online</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        :root {
+            --color-primary: #2A3B5F;
+            --color-secondary: #D4AF37;
+            --color-light: #FFFFFF;
+            --color-dark: #121212;
+        }
+        
+        [data-theme="dark"] {
+            --bg-color: var(--color-dark);
+            --text-color: var(--color-light);
+            --card-bg: #1E1E1E;
+        }
+        
+        [data-theme="light"] {
+            --bg-color: var(--color-light);
+            --text-color: var(--color-dark);
+            --card-bg: #F5F5F5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--color-secondary);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            color: var(--color-secondary);
+        }
+        
+        .theme-switcher {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, #1a2a44 100%);
+            color: white;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .cta-button {
+            background: var(--color-secondary);
+            color: var(--color-primary);
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .booking-section {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+        
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            text-decoration: none;
+            z-index: 1000;
+        }
+        
+        .install-prompt {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background: var(--color-primary);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+            z-index: 1000;
+            max-width: 300px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .hero {
+                padding: 40px 15px;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">✂️</span>
+                <span>A.S. Barbería</span>
+            </div>
+            <button class="theme-switcher" onclick="toggleTheme()">🌙 Modo Oscuro</button>
+        </header>
+        
+        <section class="hero">
+            <h1 style="font-size: 2.5rem; margin-bottom: 20px;">Reserva Tu Corte Perfecto</h1>
+            <p style="font-size: 1.2rem; margin-bottom: 30px;">Citas online • Barberos expertos • Ambiente premium</p>
+            <a href="#reservar" class="cta-button">RESERVAR AHORA</a>
+        </section>
+        
+        <div class="features">
+            <div class="feature-card">
+                <h3>📅 Reserva 24/7</h3>
+                <p>Agenda tu cita en cualquier momento, desde cualquier dispositivo</p>
+            </div>
+            <div class="feature-card">
+                <h3>⏰ Recordatorio</h3>
+                <p>Te avisamos 1.5 horas antes de tu turno vía WhatsApp</p>
+            </div>
+            <div class="feature-card">
+                <h3>📱 App-like</h3>
+                <p>Instálala en tu celular como una aplicación normal</p>
+            </div>
+        </div>
+        
+        <section class="booking-section" id="reservar">
+            <h2 style="margin-bottom: 20px;">Reserva Tu Turno</h2>
+            <!-- Aquí irá el formulario de reservas -->
+            <div id="booking-form">
+                <p>Formulario de reservas se cargará aquí...</p>
+            </div>
+        </section>
+        
+        <section class="booking-section">
+            <h2>📊 Panel Administrativo</h2>
+            <p><strong>Acceso admin:</strong> <a href="/admin.html" style="color: var(--color-secondary);">Clic aquí</a></p>
+            <p><em>Las métricas se actualizarán automáticamente</em></p>
+        </section>
+    </div>
+    
+    <a href="https://wa.me/549TU_NUMERO" class="whatsapp-button" target="_blank">💬</a>
+    
+    <div class="install-prompt" id="installPrompt">
+        <p>📱 Instalar A.S. Barbería como app</p>
+        <button onclick="installApp()" style="background: var(--color-secondary); color: var(--color-primary); border: none; padding: 8px 15px; border-radius: 5px; margin-top: 10px; cursor: pointer;">Instalar</button>
+        <button onclick="closePrompt()" style="background: transparent; color: white; border: none; margin-left: 10px; cursor: pointer;">X</button>
+    </div>
+
+    <script>
+        // Sistema de temas
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            
+            const button = document.querySelector('.theme-switcher');
+            button.textContent = newTheme === 'light' ? '🌙 Modo Oscuro' : '☀️ Modo Claro';
+            
+            // Guardar preferencia
+            localStorage.setItem('theme', newTheme);
+        }
+        
+        // Cargar tema guardado
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+        document.querySelector('.theme-switcher').textContent = 
+            savedTheme === 'light' ? '🌙 Modo Oscuro' : '☀️ Modo Claro';
+        
+        // PWA Install Prompt
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            setTimeout(() => {
+                document.getElementById('installPrompt').style.display = 'block';
+            }, 3000);
+        });
+        
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('App instalada');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+            closePrompt();
+        }
+        
+        function closePrompt() {
+            document.getElementById('installPrompt').style.display = 'none';
+        }
+        
+        // Cargar formulario de reservas desde Google Sheets
+        window.addEventListener('DOMContentLoaded', () => {
+            // Esto se completará en el paso 4
+            console.log('Página cargada - listo para reservas');
+        });
+    </script>
+</body>
+</html>
